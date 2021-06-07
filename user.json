@@ -1,0 +1,12 @@
+[
+    {
+        "username":"admin",
+        "password":"123456"
+    },
+    {
+        "username": "kitdostudio",
+        "password": "123456",
+        "key": "123123",
+        "email":"kitdostudio@gmail.com"
+    }
+]
