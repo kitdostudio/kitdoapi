@@ -18,6 +18,6 @@ app.get('/', function(req, res){
 // });
 
 ///////////////////////
-app.listen(3000,function(){
-    console.log('server is listening at https://kitdommo.herokuapp.com/');
+app.listen(process.env.PORT, function(){
+    console.log('server is listening at http://localhost:3000');
 });
