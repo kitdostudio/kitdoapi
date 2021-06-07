@@ -19,5 +19,5 @@ app.get('/', function(req, res){
 
 ///////////////////////
 app.listen(3000,function(){
-    console.log('server is listening at http://localhost:3000');
+    console.log('server is listening at https://kitdommo.herokuapp.com/');
 });
