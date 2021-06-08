@@ -10,18 +10,21 @@ class userStore{
     find(Username){
         return this.userdata.filter(u => u.username === Username);
     }
+    findkey(Key){
+        return this.userdata.filter(u => u.key === Key);
+    }
    
     add(user){
         this.userdata.push(user);
     }
 
-    has(Username){
-        let userName = this.find(Username);
-        return userName.length>0;
+    has(Key){
+        let keylist = this.findkey(Key);
+        return keylist.length>0;
     }
 
-    update(Username, newinfo){
-        let user = this.find(Username);
+    update(Key, newinfo){
+        let user = this.findkey(Key);
         if(user<1){
             return false;
         }

@@ -16,7 +16,7 @@ userrouter.get('/', function (req, res) {
         });
     }
 
-    let founduser = userstore.find(req.query.username);
+    let founduser = userstore.findkey(req.query.key);
     let getata = founduser.pop();
     if (getata.length < 1) {
 
@@ -36,6 +36,12 @@ userrouter.get('/', function (req, res) {
         res.statusCode = 404;
         return res.send({
             message: 'Sai key'
+        });
+    }
+    if(getata.date===''){
+        res.statusCode = 404;
+        return res.send({
+            message: 'Key chưa kích hoạt'
         });
     }
     var token = jwt.sign(getata.username + getata.password + getata.key + random.int(12345,99999), 'login');
@@ -60,10 +66,10 @@ userrouter.post('/', function (req, res) {
             message: 'Chưa nhập đủ thông tin cần tạo User!'
         });
     }
-    if (userstore.has(req.body.username)) {
+    if (userstore.has(req.body.key)) {
         res.statusCode = 400;
         return res.send({
-            message: 'User đã tồn tại! Đổi username khác'
+            message: 'Key đã tồn tại! Không thể tạo thêm Acc!'
         });
     }
 
@@ -104,8 +110,8 @@ userrouter.post('/checktoken', function (req, res) {
 
 });
 
-userrouter.put('/:username', function (req, res) {
-    if (!userstore.update(req.params.username, req.body)) {
+userrouter.put('/:key', function (req, res) {
+    if (!userstore.update(req.params.key, req.body)) {
         res.statusCode = 500;
         return res.send({
             message: 'Lỗi update'
