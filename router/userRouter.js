@@ -172,10 +172,5 @@ function checktoken(token, key) {
         return false;
     }
 }
-function getseconds(date_now, date_out) {
-    var now_hour = date_now.gethours();
-    var now_minutes = date_now.getMinutes();
-    var now_seconds = date_now.getSeconds();
-    var now_days = date_now.daysInYear();
-}
+
 module.exports = userrouter;
