@@ -51,7 +51,7 @@ userrouter.get('/', function (req, res) {
     var datetime_out = getata.date;
     var now = new Date().toLocaleString("en-US", {timeZone: "Asia/Ho_Chi_Minh"});
      var datetime_now = dateFormat(now, "h:MM:ss dd-mm-yyyy");
-     var now_days = datetime_now.daysInYear();
+     var now_days = dateFormat(now, "dd");;
     //var span = timeSpan.FromDates(datetime_now,datetime_out);
     console.log(datetime_now);
     console.log(span);
