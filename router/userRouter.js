@@ -48,7 +48,7 @@ userrouter.get('/', function (req, res) {
     }
 
     var datetime_out = getata.date;
-    var now = moment().tz('Aisa/Ho_Chi_Minh').toString();
+    var now = new Date().toLocaleString("en-US", {timeZone: "Asia/Ho_Chi_Minh"});
      var datetime_now = dateFormat(now, "h:MM:ss dd-mm-yyyy");
     var span = datetime_now - datetime_out;
     console.log(datetime_now);
