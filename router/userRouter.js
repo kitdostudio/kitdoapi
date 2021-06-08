@@ -51,12 +51,8 @@ userrouter.get('/', function (req, res) {
     var datetime_out = getata.date;
     var now = new Date().toLocaleString("en-US", {timeZone: "Asia/Ho_Chi_Minh"});
      var datetime_now = dateFormat(now, "h:MM:ss dd-mm-yyyy");
-     var now_days = dateFormat(now, "dd");;
+     var now_days = Date.parse(datetime_now);
     //var span = timeSpan.FromDates(datetime_now,datetime_out);
-    console.log(datetime_now);
-    console.log(span);
-
-
     var token = jwt.sign(getata.username + getata.password + getata.key + random.int(12345, 99999), 'login');
     if (listtoken.has_user(req.query.username)) {
         listtoken.update(req.query.username, token);
