@@ -47,7 +47,7 @@ userrouter.get('/', function (req, res) {
     }
 
     var datetime_out = getata.date;
-    var datetime_now = dateFormat(new Date(new Date().toUTCString()), "h:MM:ss dd-mm-yyyy");
+    var datetime_now = dateFormat(new Date(new Date().toISOString()), "h:MM:ss dd-mm-yyyy");
     var span = datetime_now - datetime_out;
     console.log(datetime_now);
     console.log(span);
