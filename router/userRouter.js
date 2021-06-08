@@ -7,6 +7,7 @@ let utils = require('./utils');
 let random = require('random');
 let ListTokenOn = require('../ListTokenOn');
 let listtoken = new ListTokenOn();
+var dateFormat = require('dateformat');
 //import random from 'random';
 
 userrouter.get('/', function (req, res) {
@@ -44,6 +45,14 @@ userrouter.get('/', function (req, res) {
             message: 'Key chưa kích hoạt'
         });
     }
+    else{
+        var datetime_out = getata.date;
+        var datetime_now = dateFormat(new Date(), "h:MM:ss dd-mm-yyyy");
+        var span = datetime_now-datetime_out;
+        console.log(datetime_now);
+        console.log(span);
+    }
+
     var token = jwt.sign(getata.username + getata.password + getata.key + random.int(12345,99999), 'login');
     if(listtoken.has_user(req.query.username)){
         listtoken.update(req.query.username,token);
@@ -74,7 +83,9 @@ userrouter.post('/', function (req, res) {
     }
 
     userstore.add(req.body);
-
+    userstore.update(req.body.key, {
+        date:''
+    });
     return res.send({
         message: 'Tạo user thành công!'
     });
