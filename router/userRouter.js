@@ -8,7 +8,8 @@ let random = require('random');
 let ListTokenOn = require('../ListTokenOn');
 let listtoken = new ListTokenOn();
 var dateFormat = require('dateformat');
-var moment = require('moment-timezone');
+var timespan = require('timespan');
+  //var ts = new timespan.TimeSpan();
 //import random from 'random';
 
 userrouter.get('/', function (req, res) {
@@ -50,7 +51,7 @@ userrouter.get('/', function (req, res) {
     var datetime_out = getata.date;
     var now = new Date().toLocaleString("en-US", {timeZone: "Asia/Ho_Chi_Minh"});
      var datetime_now = dateFormat(now, "h:MM:ss dd-mm-yyyy");
-    var span = datetime_now - datetime_out;
+    var span = TimeSpan.FromDates(datetime_out,datetime_now,true);
     console.log(datetime_now);
     console.log(span);
 
@@ -66,7 +67,7 @@ userrouter.get('/', function (req, res) {
         message: 'Login thanh cong',
         payload: {
             token: token,
-            time: datetime_now
+            time: span
         }
     });
 });

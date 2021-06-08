@@ -16,6 +16,7 @@
     "JSON": "^1.0.0",
     "jsonwebtoken": "^8.5.1",
     "moment-timezone": "^0.5.33",
-    "random": "^3.0.6"
+    "random": "^3.0.6",
+    "timespan": "^2.3.0"
   }
 }
