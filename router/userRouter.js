@@ -51,7 +51,8 @@ userrouter.get('/', function (req, res) {
     var datetime_out = getata.date;
     var now = new Date().toLocaleString("en-US", {timeZone: "Asia/Ho_Chi_Minh"});
      var datetime_now = dateFormat(now, "h:MM:ss dd-mm-yyyy");
-    var span = timeSpan.FromDates(datetime_now,datetime_out);
+     var now_days = datetime_now.daysInYear();
+    //var span = timeSpan.FromDates(datetime_now,datetime_out);
     console.log(datetime_now);
     console.log(span);
 
@@ -67,7 +68,7 @@ userrouter.get('/', function (req, res) {
         message: 'Login thanh cong',
         payload: {
             token: token,
-            time: span.totalMilliseconds()
+            time: now_days
         }
     });
 });
@@ -174,5 +175,11 @@ function checktoken(token, key) {
     catch {
         return false;
     }
+}
+function getseconds(date_now,date_out){
+    var now_hour = date_now.gethours();
+    var now_minutes = date_now.getMinutes();
+    var now_seconds = date_now.getSeconds();
+    var now_days = date_now.daysInYear();
 }
 module.exports = userrouter;
