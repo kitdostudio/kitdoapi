@@ -39,31 +39,32 @@ userrouter.get('/', function (req, res) {
             message: 'Sai key'
         });
     }
-    if(getata.date===''){
+    if (getata.date === '') {
         res.statusCode = 404;
         return res.send({
             message: 'Key chưa kích hoạt'
         });
     }
-    else{
-        var datetime_out = getata.date;
-        var datetime_now = dateFormat(new Date(), "h:MM:ss dd-mm-yyyy");
-        var span = datetime_now-datetime_out;
-        console.log(datetime_now);
-        console.log(span);
-    }
 
-    var token = jwt.sign(getata.username + getata.password + getata.key + random.int(12345,99999), 'login');
-    if(listtoken.has_user(req.query.username)){
-        listtoken.update(req.query.username,token);
+    var datetime_out = getata.date;
+    var datetime_now = dateFormat(new Date(), "h:MM:ss dd-mm-yyyy");
+    var span = datetime_now - datetime_out;
+    console.log(datetime_now);
+    console.log(span);
+
+
+    var token = jwt.sign(getata.username + getata.password + getata.key + random.int(12345, 99999), 'login');
+    if (listtoken.has_user(req.query.username)) {
+        listtoken.update(req.query.username, token);
     }
-    else{
-        listtoken.add(req.query.username,token);
+    else {
+        listtoken.add(req.query.username, token);
     }
     return res.send({
         message: 'Login thanh cong',
         payload: {
-            token: token
+            token: token,
+            time: span
         }
     });
 });
@@ -84,7 +85,7 @@ userrouter.post('/', function (req, res) {
 
     userstore.add(req.body);
     userstore.update(req.body.key, {
-        date:''
+        date: ''
     });
     return res.send({
         message: 'Tạo user thành công!'
@@ -99,7 +100,7 @@ userrouter.post('/checktoken', function (req, res) {
             message: 'Chưa nhập token!'
         });
     }
-    if(!listtoken.has_token(req.body.token)){
+    if (!listtoken.has_token(req.body.token)) {
         res.statusCode = 400;
         return res.send({
             message: 'Token Die!'
