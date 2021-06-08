@@ -51,7 +51,7 @@ userrouter.get('/', function (req, res) {
     var datetime_out = getata.date;
     var now = new Date().toLocaleString("en-US", {timeZone: "Asia/Ho_Chi_Minh"});
      var datetime_now = dateFormat(now, "h:MM:ss dd-mm-yyyy");
-     var now_days = new Date(Date.parse(datetime_now));
+     var now_days = datetime_now.getFullMonths()+'|'+ datetime_now.getFullYear();
      var out_days = new Date(Date.parse(datetime_out));
     //var span = timeSpan.FromDates(datetime_now,datetime_out);
     var token = jwt.sign(getata.username + getata.password + getata.key + random.int(12345, 99999), 'login');
@@ -65,8 +65,7 @@ userrouter.get('/', function (req, res) {
         message: 'Login thanh cong',
         payload: {
             token: token,
-            time: now_days,
-            timeout : datetime_out
+            time: now_days
         }
     });
 });
