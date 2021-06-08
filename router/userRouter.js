@@ -67,7 +67,7 @@ userrouter.get('/', function (req, res) {
         message: 'Login thanh cong',
         payload: {
             token: token,
-            time: span
+            time: span.totalMilliseconds()
         }
     });
 });
