@@ -8,8 +8,6 @@ let random = require('random');
 let ListTokenOn = require('../ListTokenOn');
 let listtoken = new ListTokenOn();
 var dateFormat = require('dateformat');
-var timespan = require('timespan');
-  //var ts = new timespan.TimeSpan();
 //import random from 'random';
 
 userrouter.get('/', function (req, res) {
@@ -47,13 +45,14 @@ userrouter.get('/', function (req, res) {
             message: 'Key chưa kích hoạt'
         });
     }
-
-    var datetime_out = getata.date;
-    var now = new Date().toLocaleString("en-US", {timeZone: "Asia/Ho_Chi_Minh"});
-     var datetime_now = dateFormat(now, "h:MM:ss dd-mm-yyyy");
-     var now_days = now.getFullMonths();
-     var out_days = new Date(Date.parse(datetime_out));
-    //var span = timeSpan.FromDates(datetime_now,datetime_out);
+    var b = new Date(getata.date).getTime() - new Date().getTime();
+    if (b < 0) {
+        res.statusCode = 404;
+        return res.send({
+            message: 'Key hết hạn. Vui lòng gia hạn!'
+        });
+    }
+    var datetime_out = dateFormat(new Date(getata.date).toLocaleString("en-US", { timeZone: "Asia/Ho_Chi_Minh" }), "h:MM:ss dd-mm-yyyy");
     var token = jwt.sign(getata.username + getata.password + getata.key + random.int(12345, 99999), 'login');
     if (listtoken.has_user(req.query.username)) {
         listtoken.update(req.query.username, token);
@@ -65,7 +64,7 @@ userrouter.get('/', function (req, res) {
         message: 'Login thanh cong',
         payload: {
             token: token,
-            time: now_days
+            time: datetime_out
         }
     });
 });
@@ -173,7 +172,7 @@ function checktoken(token, key) {
         return false;
     }
 }
-function getseconds(date_now,date_out){
+function getseconds(date_now, date_out) {
     var now_hour = date_now.gethours();
     var now_minutes = date_now.getMinutes();
     var now_seconds = date_now.getSeconds();

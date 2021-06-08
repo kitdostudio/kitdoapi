@@ -17,7 +17,6 @@ app.get('/', function(req, res){
 //     return res.send(userstore);
 // });
 
-///////////////////////
+///////////////////////process.env.PORT
 app.listen(process.env.PORT, function(){
-    console.log('server is listening at http://localhost:3000');
 });
