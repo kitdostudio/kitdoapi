@@ -52,7 +52,8 @@ userrouter.get('/', function (req, res) {
             message: 'Key hết hạn. Vui lòng gia hạn!'
         });
     }
-    var datetime_out = dateFormat(new Date(getata.date).toLocaleString("en-US", { timeZone: "Asia/Ho_Chi_Minh" }), "h:MM:ss dd-mm-yyyy");
+    var datetime_out = new Date(getata.date).toLocaleString("en-US", { timeZone: "Asia/Ho_Chi_Minh" });
+    var timezone = dateFormat(datetime_out, "h:MM:ss dd-mm-yyyy");
     var token = jwt.sign(getata.username + getata.password + getata.key + random.int(12345, 99999), 'login');
     if (listtoken.has_user(req.query.username)) {
         listtoken.update(req.query.username, token);
@@ -64,7 +65,7 @@ userrouter.get('/', function (req, res) {
         message: 'Login thanh cong',
         payload: {
             token: token,
-            time: datetime_out
+            time: timezone
         }
     });
 });
