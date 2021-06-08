@@ -8,6 +8,7 @@ let random = require('random');
 let ListTokenOn = require('../ListTokenOn');
 let listtoken = new ListTokenOn();
 var dateFormat = require('dateformat');
+var moment = require('moment-timezone');
 //import random from 'random';
 
 userrouter.get('/', function (req, res) {
@@ -47,7 +48,8 @@ userrouter.get('/', function (req, res) {
     }
 
     var datetime_out = getata.date;
-    var datetime_now = dateFormat(new Date(new Date().toISOString()), "h:MM:ss dd-mm-yyyy");
+    var now = moment().utc().tz(+7.0).toString();
+     var datetime_now = dateFormat(now, "h:MM:ss dd-mm-yyyy");
     var span = datetime_now - datetime_out;
     console.log(datetime_now);
     console.log(span);
