@@ -31,7 +31,7 @@ class userStore{
 
         let olddata  = user.pop();
         let newdata = Object.assign(olddata,newinfo);
-        let olddatalist = this.userdata.filter(u => u.username !== Username);
+        let olddatalist = this.userdata.filter(u => u.key !== Key);
 
         this.userdata = [...olddatalist, newdata];
 
