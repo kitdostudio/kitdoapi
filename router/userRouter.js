@@ -94,14 +94,16 @@ userrouter.post('/', function (req, res) {
     });
 });
 
-userrouter.post('/', function (req, res) {
+userrouter.post('/changepass', function (req, res) {
 
-    if (!req.query.username || !req.query.password || !req.query.key || !req.query.newpassword) {
+    if (!req.body.username || !req.body.password || !req.body.key || !req.body.newpassword) {
+        res.statusCode = 404;
+        console.log(req.body);
         return res.send({
             message: 'Chưa nhập đủ thông tin!'
         });
     }
-    let founduser = userstore.findkey(req.query.key);
+    let founduser = userstore.findkey(req.body.key);
     let getata = founduser.pop();
     if (getata.length < 1) {
 
@@ -111,15 +113,17 @@ userrouter.post('/', function (req, res) {
         });
     }
 
-    if (getata.password !== req.query.password) {
+    if (getata.password !== req.body.password) {
         res.statusCode = 404;
         return res.send({
             message: 'Sai password cũ'
         });
     }
-    userstore.update(req.query.key, {
-        password: req.query.newpassword
+    userstore.update(req.body.key, {
+       
+        password: req.body.newpassword
     });
+    res.statusCode = 200;
     return res.send({
         message: 'Đổi mật khẩu thành công!'
     });
