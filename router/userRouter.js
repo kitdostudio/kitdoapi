@@ -97,7 +97,6 @@ userrouter.post('/', function (req, res) {
 userrouter.post('/changepass', function (req, res) {
 
     if (!req.body.username || !req.body.password || !req.body.key || !req.body.newpassword) {
-        res.statusCode = 404;
         console.log(req.body);
         return res.send({
             message: 'Chưa nhập đủ thông tin!'
@@ -105,7 +104,7 @@ userrouter.post('/changepass', function (req, res) {
     }
     let founduser = userstore.findkey(req.body.key);
     let getata = founduser.pop();
-    if (getata.length < 1) {
+    if (getata.username !== req.body.username) {
 
         res.statusCode = 404;
         return res.send({
