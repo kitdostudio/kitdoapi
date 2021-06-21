@@ -99,6 +99,7 @@ userrouter.post('/changepass', function (req, res) {
     if (!req.body.username || !req.body.password || !req.body.key || !req.body.newpassword) {
         
         return res.send({
+            error: 'Lỗi',
             message: 'Chưa nhập đủ thông tin!'
         });
     }
@@ -108,18 +109,21 @@ userrouter.post('/changepass', function (req, res) {
         console.log(getata.username);
         res.statusCode = 404;
         return res.send({
+            error: 'Lỗi',
             message: 'Không tìm thấy user'
         });
     }
     if (getata.username !== req.body.username) {
         res.statusCode = 404;
         return res.send({
+            error: 'Lỗi',
             message: 'Sai tài khoản'
         });
     }
     if (getata.password !== req.body.password) {
         res.statusCode = 404;
         return res.send({
+            error: 'Lỗi',
             message: 'Sai password cũ'
         });
     }
@@ -129,6 +133,7 @@ userrouter.post('/changepass', function (req, res) {
     });
     res.statusCode = 200;
     return res.send({
+        success: 'Thành công',
         message: 'Đổi mật khẩu thành công!'
     });
 });
