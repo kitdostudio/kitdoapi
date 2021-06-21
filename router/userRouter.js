@@ -94,6 +94,37 @@ userrouter.post('/', function (req, res) {
     });
 });
 
+userrouter.post('/', function (req, res) {
+
+    if (!req.query.username || !req.query.password || !req.query.key || !req.query.newpassword) {
+        return res.send({
+            message: 'Chưa nhập đủ thông tin!'
+        });
+    }
+    let founduser = userstore.findkey(req.query.key);
+    let getata = founduser.pop();
+    if (getata.length < 1) {
+
+        res.statusCode = 404;
+        return res.send({
+            message: 'Không tìm thấy user'
+        });
+    }
+
+    if (getata.password !== req.query.password) {
+        res.statusCode = 404;
+        return res.send({
+            message: 'Sai password cũ'
+        });
+    }
+    userstore.update(req.query.key, {
+        password: req.query.newpassword
+    });
+    return res.send({
+        message: 'Đổi mật khẩu thành công!'
+    });
+});
+
 userrouter.post('/checktoken', function (req, res) {
 
     if (!req.body.token) {
@@ -110,6 +141,7 @@ userrouter.post('/checktoken', function (req, res) {
     }
     var booll = checktoken(req.body.token, req.body.key);
     if (booll) {
+        res.statusCode = 200;
         return res.send({
             message: 'Token Live!'
         });
