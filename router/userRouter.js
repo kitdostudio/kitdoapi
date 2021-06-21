@@ -97,21 +97,26 @@ userrouter.post('/', function (req, res) {
 userrouter.post('/changepass', function (req, res) {
 
     if (!req.body.username || !req.body.password || !req.body.key || !req.body.newpassword) {
-        console.log(req.body);
+        
         return res.send({
             message: 'Chưa nhập đủ thông tin!'
         });
     }
     let founduser = userstore.findkey(req.body.key);
     let getata = founduser.pop();
-    if (getata.username !== req.body.username) {
-
+    if (getata.length < 1) {
+        console.log(getata.username);
         res.statusCode = 404;
         return res.send({
             message: 'Không tìm thấy user'
         });
     }
-
+    if (getata.username !== req.body.username) {
+        res.statusCode = 404;
+        return res.send({
+            message: 'Sai tài khoản'
+        });
+    }
     if (getata.password !== req.body.password) {
         res.statusCode = 404;
         return res.send({

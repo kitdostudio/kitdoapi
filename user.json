@@ -1,14 +1,11 @@
 [
-    {
-        "username":"admin",
-        "password":"123456",
-        "key":"Z9ALQS2TP02947401599P02725109440WD-WCC4M4CKKJ2N"
-    },
+    
     {
         "username": "kitdostudio",
         "password": "123456",
-        "key": "123123",
+        "key": "Z9ALQS2TP02947401599P02725109440WD-WCC4M4CKKJ2N",
         "email":"kitdostudio@gmail.com",
         "date":""
     }
+    
 ]
